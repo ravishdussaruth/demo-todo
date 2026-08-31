@@ -30,7 +30,7 @@
 - [x] F02 — Create Todo
 - [x] F03 — List & View Todos
 - [x] F04 — Edit Todo
-- [ ] F05 — Complete / Reopen Todo
+- [x] F05 — Complete / Reopen Todo
 - [ ] F06 — Delete Todo
 - [ ] F07 — Filtering & Basic Search
 - [ ] F08 — Validation, Error States & UX Hardening
