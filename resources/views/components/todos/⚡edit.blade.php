@@ -21,9 +21,13 @@ new class extends Component
 
     public function save(): void
     {
+        $this->updated = false;
+
         $this->validate();
 
-        $this->todo->update([
+        // The bound $todo was resolved at mount(); re-verify it still exists
+        // in case it was deleted elsewhere between then and this submission.
+        Todo::findOrFail($this->todo->id)->update([
             'title' => $this->title,
         ]);
 

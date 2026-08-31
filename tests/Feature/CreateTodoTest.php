@@ -54,4 +54,16 @@ class CreateTodoTest extends TestCase
 
         $this->assertSame(0, Todo::count());
     }
+
+    public function test_success_message_does_not_persist_after_a_later_failed_submission(): void
+    {
+        Livewire::test('todos.create-todo')
+            ->set('title', 'Buy milk')
+            ->call('save')
+            ->assertSee('Todo created successfully.')
+            ->set('title', '')
+            ->call('save')
+            ->assertHasErrors(['title' => ['required']])
+            ->assertDontSee('Todo created successfully.');
+    }
 }
