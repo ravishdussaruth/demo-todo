@@ -68,6 +68,20 @@ class FilterAndSearchTodosTest extends TestCase
             ->assertSee('Read a book');
     }
 
+    public function test_status_and_search_filters_combine(): void
+    {
+        Todo::factory()->create(['title' => 'Buy milk', 'completed' => true]);
+        Todo::factory()->create(['title' => 'Buy bread', 'completed' => false]);
+        Todo::factory()->create(['title' => 'Read a book', 'completed' => true]);
+
+        Livewire::test('todos.index')
+            ->set('status', 'completed')
+            ->set('search', 'buy')
+            ->assertSee('Buy milk')
+            ->assertDontSee('Buy bread')
+            ->assertDontSee('Read a book');
+    }
+
     public function test_changing_status_filter_updates_results(): void
     {
         Todo::factory()->create(['title' => 'Buy milk', 'completed' => true]);
