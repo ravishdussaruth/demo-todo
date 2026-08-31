@@ -28,7 +28,7 @@
 
 - [x] F01 — Project Baseline & Todo Domain
 - [x] F02 — Create Todo
-- [ ] F03 — List & View Todos
+- [x] F03 — List & View Todos
 - [ ] F04 — Edit Todo
 - [ ] F05 — Complete / Reopen Todo
 - [ ] F06 — Delete Todo
