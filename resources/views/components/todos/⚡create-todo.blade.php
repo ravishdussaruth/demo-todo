@@ -13,6 +13,8 @@ new class extends Component
 
     public function save(): void
     {
+        $this->created = false;
+
         $this->validate();
 
         Todo::create([

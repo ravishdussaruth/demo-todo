@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Todo;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -73,5 +74,33 @@ class EditTodoTest extends TestCase
         $response = $this->get('/todos/999999/edit');
 
         $response->assertNotFound();
+    }
+
+    public function test_success_message_does_not_persist_after_a_later_failed_submission(): void
+    {
+        $todo = Todo::factory()->create(['title' => 'Buy milk']);
+
+        Livewire::test('todos.edit', ['todo' => $todo])
+            ->set('title', 'Buy oat milk')
+            ->call('save')
+            ->assertSee('Todo updated successfully.')
+            ->set('title', '')
+            ->call('save')
+            ->assertHasErrors(['title' => ['required']])
+            ->assertDontSee('Todo updated successfully.');
+    }
+
+    public function test_saving_a_todo_deleted_after_mount_throws_not_found_instead_of_silently_succeeding(): void
+    {
+        $todo = Todo::factory()->create(['title' => 'Buy milk']);
+
+        $component = Livewire::test('todos.edit', ['todo' => $todo])
+            ->set('title', 'Buy oat milk');
+
+        $todo->delete();
+
+        $this->expectException(ModelNotFoundException::class);
+
+        $component->call('save');
     }
 }
