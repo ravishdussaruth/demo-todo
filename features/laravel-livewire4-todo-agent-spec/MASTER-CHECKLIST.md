@@ -26,7 +26,7 @@
 
 ## Feature Progression
 
-- [ ] F01 — Project Baseline & Todo Domain
+- [x] F01 — Project Baseline & Todo Domain
 - [ ] F02 — Create Todo
 - [ ] F03 — List & View Todos
 - [ ] F04 — Edit Todo
