@@ -34,7 +34,7 @@
 - [x] F06 — Delete Todo
 - [x] F07 — Filtering & Basic Search
 - [x] F08 — Validation, Error States & UX Hardening
-- [ ] F09 — Automated Test Suite & Regression Pass
+- [x] F09 — Automated Test Suite & Regression Pass
 - [ ] F10 — Final Integration, Documentation & Release Check
 
 ## Definition of Done — Every Feature
