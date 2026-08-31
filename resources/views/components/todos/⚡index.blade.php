@@ -21,6 +21,13 @@ new class extends Component
 
         unset($this->todos);
     }
+
+    public function deleteTodo(int $todoId): void
+    {
+        Todo::findOrFail($todoId)->delete();
+
+        unset($this->todos);
+    }
 };
 ?>
 
@@ -37,6 +44,10 @@ new class extends Component
 
                     <button type="button" wire:click="toggleCompleted({{ $todo->id }})">
                         {{ $todo->completed ? 'Reopen' : 'Mark complete' }}
+                    </button>
+
+                    <button type="button" wire:click="deleteTodo({{ $todo->id }})">
+                        Delete
                     </button>
                 </li>
             @endforeach
