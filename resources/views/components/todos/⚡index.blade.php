@@ -7,10 +7,19 @@ use Livewire\Component;
 
 new class extends Component
 {
+    public string $status = 'all';
+
+    public string $search = '';
+
     #[Computed]
     public function todos(): Collection
     {
-        return Todo::query()->orderBy('id')->get();
+        return Todo::query()
+            ->when($this->status === 'completed', fn ($query) => $query->where('completed', true))
+            ->when($this->status === 'incomplete', fn ($query) => $query->where('completed', false))
+            ->when($this->search !== '', fn ($query) => $query->where('title', 'like', '%'.$this->search.'%'))
+            ->orderBy('id')
+            ->get();
     }
 
     public function toggleCompleted(int $todoId): void
@@ -34,8 +43,22 @@ new class extends Component
 <div>
     <h1>Todos</h1>
 
+    <label for="search">Search</label>
+    <input type="text" id="search" wire:model.live="search" placeholder="Search by title">
+
+    <label for="status">Status</label>
+    <select id="status" wire:model.live="status">
+        <option value="all">All</option>
+        <option value="incomplete">Incomplete</option>
+        <option value="completed">Completed</option>
+    </select>
+
     @if ($this->todos->isEmpty())
-        <p data-testid="todos-empty-state">No todos yet.</p>
+        @if ($status === 'all' && $search === '')
+            <p data-testid="todos-empty-state">No todos yet.</p>
+        @else
+            <p data-testid="todos-no-matches">No todos match your filters.</p>
+        @endif
     @else
         <ul data-testid="todos-list">
             @foreach ($this->todos as $todo)
