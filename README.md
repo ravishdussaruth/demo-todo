@@ -56,4 +56,44 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# demo-todo
+
+## Todo Application
+
+A Laravel + Livewire 4 Todo app. Todos have a `title` (required, max 255 characters)
+and a `completed` state.
+
+### Routes
+
+| Method | URI                | Purpose                    |
+|--------|--------------------|-----------------------------|
+| GET    | `/`                | List Todos, filter by status, search by title |
+| GET    | `/todos/create`    | Create a Todo               |
+| GET    | `/todos/{todo}/edit` | Edit an existing Todo     |
+
+Marking a Todo complete/reopening it and deleting a Todo are actions on the
+list page (`/`).
+
+### Setup
+
+```bash
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate
+npm run build
+php artisan serve
+```
+
+### Testing
+
+```bash
+php artisan test
+```
+
+### Code style
+
+```bash
+vendor/bin/pint
+```
