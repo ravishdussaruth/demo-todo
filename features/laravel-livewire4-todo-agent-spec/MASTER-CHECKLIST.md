@@ -31,7 +31,7 @@
 - [x] F03 — List & View Todos
 - [x] F04 — Edit Todo
 - [x] F05 — Complete / Reopen Todo
-- [ ] F06 — Delete Todo
+- [x] F06 — Delete Todo
 - [ ] F07 — Filtering & Basic Search
 - [ ] F08 — Validation, Error States & UX Hardening
 - [ ] F09 — Automated Test Suite & Regression Pass
